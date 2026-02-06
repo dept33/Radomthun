@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech Fund - ร่วมสนับสนุน</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;600;700&display=swap");
+      body {
+        font-family: "Kanit", sans-serif;
+        background: #020617;
+        color: white;
+        overflow-x: hidden;
+      }
+
+      /* Glass Effect */
+      .glass-panel {
+        background: rgba(30, 41, 59, 0.4);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .input-group {
+        position: relative;
+      }
+      .input-field {
+        background: rgba(15, 23, 42, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+      .input-field:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        outline: none;
+      }
+
+      /* Background Animation */
+      .bg-glow {
+        position: fixed;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.15) 0%,
+          rgba(0, 0, 0, 0) 70%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        animation: pulse 10s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.5;
+          transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+          opacity: 0.8;
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-4">
+    <div class="bg-glow"></div>
+
+    <a
+      href="index.html"
+      class="fixed top-6 left-6 text-slate-400 hover:text-white transition-all z-20 flex items-center gap-2"
+    >
+      <i class="fas fa-arrow-left"></i> <span>หน้าหลัก</span>
+    </a>
+
+    <button
+      onclick="window.location.href = 'admin.html'"
+      class="fixed top-6 right-6 text-slate-600 hover:text-blue-400 transition-all z-20"
+    >
+      <i class="fas fa-cog"></i>
+    </button>
+
+    <div
+      class="w-full max-w-lg glass-panel rounded-[2.5rem] p-8 md:p-10 relative animate-modal my-10"
+    >
+      <div class="text-center mb-8">
+        <div
+          class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 mb-6 shadow-lg shadow-blue-500/20"
+        >
+          <i class="fas fa-hand-holding-heart text-3xl text-white"></i>
+        </div>
+        <h1
+          class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-cyan-200"
+        >
+          สนับสนุนแผนกฯ
+        </h1>
+        <p class="text-slate-400 text-sm font-light mt-2">
+          ร่วมเป็นส่วนหนึ่งในการพัฒนาการศึกษา
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <div class="input-group">
+          <label
+            class="text-[10px] uppercase tracking-widest text-blue-400 font-bold mb-2 block"
+            >จำนวนเงิน (บาท)</label
+          >
+          <div class="relative">
+            <span
+              class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"
+              >฿</span
+            >
+            <input
+              type="number"
+              id="amountInput"
+              placeholder="0.00"
+              class="input-field w-full py-4 pl-10 pr-4 rounded-xl text-xl font-bold text-white tracking-wider"
+            />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label
+            class="text-[10px] uppercase tracking-widest text-blue-400 font-bold mb-2 block"
+            >ชื่อผู้บริจาค</label
+          >
+          <input
+            type="text"
+            id="nameInput"
+            placeholder="ระบุชื่อ หรือ นามแฝง"
+            class="input-field w-full py-3 px-4 rounded-xl text-sm text-white"
+          />
+        </div>
+
+        <div class="input-group">
+          <label class="text-[10px] uppercase tracking-widest text-emerald-400 font-bold mb-2 block">
+            ช่องทางการโอนเงิน
+          </label>
+          <div
+            class="bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 p-5 rounded-2xl shadow-lg relative overflow-hidden group"
+          >
+            <div
+              class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"
+            >
+              <i class="fas fa-university text-5xl"></i>
+            </div>
+
+            <div class="text-left relative z-10 flex flex-col gap-2">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
+                  <i class="fas fa-university text-slate-800 text-xs"></i>
+                </div>
+                <p id="bankNameMain" class="font-bold text-blue-200 text-sm">
+                  ธนาคารไทยพาณิชย์
+                </p>
+              </div>
+
+              <div class="pl-11">
+                <p
+                  id="bankNumMain"
+                  class="text-2xl font-mono font-bold text-white tracking-wider"
+                >
+                  658-264-540-3
+                </p>
+                <p id="accNameMain" class="text-xs font-light text-slate-300 mt-1">
+                  นายเอกราช และ นายอุเทน
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label
+            class="text-[10px] uppercase tracking-widest text-blue-400 font-bold mb-2 block"
+            >หลักฐานการโอน (สลิป)</label
+          >
+          <label
+            class="flex flex-col items-center justify-center p-6 bg-slate-900/40 border border-dashed border-slate-700 hover:border-blue-500/50 hover:bg-slate-800/50 rounded-xl cursor-pointer transition-all group"
+          >
+            <div
+              class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center mb-2 group-hover:bg-blue-500/20 transition-colors"
+            >
+              <i
+                class="fas fa-cloud-upload-alt text-slate-400 group-hover:text-blue-400"
+              ></i>
+            </div>
+            <span class="text-xs text-slate-400" id="fileName"
+              >คลิกเพื่ออัปโหลดสลิป</span
+            >
+            <input
+              type="file"
+              id="slip"
+              class="hidden"
+              accept="image/*"
+              onchange="updateFileName(this)"
+            />
+          </label>
+        </div>
+
+        <button
+          onclick="openPaymentModal()"
+          class="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-900/30 transform hover:scale-[1.02]"
+        >
+          ยืนยันการบริจาค <i class="fas fa-check-circle ml-2"></i>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // --- Shared Data Management ---
+      const DB_KEY = "tech_donate_data";
+
+      function getDB() {
+        return (
+          JSON.parse(localStorage.getItem(DB_KEY)) || {
+            settings: {
+              bankName: "ธนาคารไทยพาณิชย์",
+              bankNum: "658-264-540-3",
+              accName: "นายเอกราช และ นายอุเทน",
+            },
+            logs: [],
+            hardwareLogs: [],
+          }
+        );
+      }
+
+      function saveDB(data) {
+        localStorage.setItem(DB_KEY, JSON.stringify(data));
+      }
+
+      // --- UI Logic ---
+      function init() {
+        // Load latest Bank Info immediately
+        const db = getDB();
+        
+        // Populate Main Page Bank Info
+        if(document.getElementById("bankNameMain")) {
+            document.getElementById("bankNameMain").innerText = db.settings.bankName;
+            document.getElementById("bankNumMain").innerText = db.settings.bankNum;
+            document.getElementById("accNameMain").innerText = db.settings.accName;
+        }
+
+        // Check for URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("amount")) {
+          document.getElementById("amountInput").value = urlParams.get("amount");
+        }
+      }
+
+      function updateFileName(input) {
+        document.getElementById("fileName").innerText = input.files[0]
+          ? input.files[0].name
+          : "คลิกเพื่ออัปโหลดสลิป";
+        document.getElementById("fileName").classList.add("text-blue-400");
+      }
+
+      function openPaymentModal() {
+        const amount = document.getElementById("amountInput").value;
+        const name = document.getElementById("nameInput").value;
+        const file = document.getElementById("slip").files[0];
+
+        if (!amount || amount <= 0 || !name) {
+          return Swal.fire({
+            icon: "warning",
+            title: "ข้อมูลไม่ครบ",
+            text: "กรุณากรอกจำนวนเงินและชื่อ",
+            background: "#0f172a",
+            color: "#fff",
+          });
+        }
+        if (!file) {
+          return Swal.fire({
+            icon: "warning",
+            title: "ขาดหลักฐาน",
+            text: "กรุณาแนบสลิปก่อนดำเนินการต่อ",
+            background: "#0f172a",
+            color: "#fff",
+          });
+        }
+
+        confirmDonation();
+      }
+
+      async function confirmDonation() {
+    const amount = document.getElementById("amountInput").value;
+    const name = document.getElementById("nameInput").value;
+    const fileInput = document.getElementById("slip");
+    const file = fileInput.files[0];
+    
+    // ใส่ URL เว็บแอปที่ได้จากขั้นตอนที่ 2
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbwxSS2LT5B00-VM6dEwPqY1qrrZrkzaNBodTajesMfTm0Y5uuhKDSyi2QgF52DzCJWo/exec"; 
+
+    if (!file) {
+        Swal.fire("กรุณาแนบสลิป", "", "error");
+        return;
+    }
+
+    // แสดงสถานะกำลังโหลด
+    Swal.fire({
+        title: 'กำลังอัปโหลด...',
+        text: 'ระบบกำลังนำสลิปไปเก็บ',
+        allowOutsideClick: false,
+        background: "#0f172a",
+        color: "#fff",
+        didOpen: () => { Swal.showLoading() }
+    });
+
+    try {
+        // 1. แปลงรูปภาพเป็น Base64
+        const reader = new FileReader();
+        const base64Promise = new Promise((resolve) => {
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.readAsDataURL(file);
+        });
+        const base64Data = await base64Promise;
+
+        // 2. ส่งข้อมูลไปที่ Google Apps Script
+        const response = await fetch(scriptUrl, {
+            method: 'POST',
+            body: JSON.stringify({
+                base64: base64Data,
+                mimeType: file.type,
+                fileName: `Slip_${Date.now()}_${name}.png`
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            // 3. บันทึกข้อมูลลง LocalStorage (เก็บแค่ URL ของ Google Drive)
+            const db = JSON.parse(localStorage.getItem("tech_donate_data")) || { logs: [] };
+            const newLog = {
+                id: "TX-" + Date.now(),
+                name: name,
+                amount: parseFloat(amount),
+                date: new Date().toLocaleString("th-TH"),
+                slipImg: result.url, // เก็บ Link รูปแทนไฟล์ดิบ
+                timestamp: Date.now(),
+            };
+
+            db.logs.unshift(newLog);
+            localStorage.setItem("tech_donate_data", JSON.stringify(db));
+
+            Swal.fire({
+                icon: "success",
+                title: "บริจาคสำเร็จ!",
+                text: "ขอบคุณที่สนับสนุน เราได้รับข้อมูลแล้ว",
+                background: "#0f172a",
+                color: "#fff"
+            }).then(() => { window.location.href = "index.html"; });
+        } else {
+            throw new Error(result.message);
+        }
+    } catch (error) {
+        console.error(error);
+        Swal.fire("เกิดข้อผิดพลาด", "ไม่สามารถอัปโหลดรูปได้: " + error.message, "error");
+    }
+}
+
+      init();
+    </script>
+  </body>
+</html>

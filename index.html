@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech Fund - Innovation for Education</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700&display=swap");
+
+      body {
+        font-family: "Kanit", sans-serif;
+        background: #020617;
+        color: #f1f5f9;
+        overflow-x: hidden;
+      }
+
+      /* Blob Animation */
+      .blob {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.2) 0%,
+          rgba(99, 102, 241, 0.1) 100%
+        );
+        filter: blur(80px);
+        border-radius: 50%;
+        z-index: -1;
+        animation: move 20s infinite alternate;
+      }
+      @keyframes move {
+        from {
+          transform: translate(-10%, -10%);
+        }
+        to {
+          transform: translate(10%, 10%);
+        }
+      }
+
+      /* Glassmorphism */
+      .glass-card {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.4s ease;
+      }
+      .glass-card:hover {
+        border-color: rgba(59, 130, 246, 0.4);
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Text Gradient */
+      .text-gradient {
+        background: linear-gradient(to right, #60a5fa, #a78bfa, #34d399);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      /* Animation */
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s forwards;
+      }
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Mobile Menu */
+      #mobile-menu {
+        transition: max-height 0.3s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
+      }
+      #mobile-menu.open {
+        max-height: 300px;
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen relative selection:bg-blue-500 selection:text-white"
+  >
+    <div class="blob top-0 left-0 opacity-50"></div>
+    <div
+      class="blob bottom-0 right-0 opacity-50"
+      style="animation-delay: -5s"
+    ></div>
+
+    <nav
+      class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-white/5"
+    >
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg"
+            >
+              <i class="fas fa-microchip text-white"></i>
+            </div>
+            <div>
+              <h1 class="text-lg font-bold leading-tight">
+                Tech Dept. <span class="text-blue-400">Fund</span>
+              </h1>
+              <p
+                id="realtime-clock"
+                class="text-[10px] text-slate-400 font-medium tracking-widest uppercase"
+              ></p>
+            </div>
+          </div>
+
+          <div class="hidden md:flex items-center gap-6">
+            <a
+              href="index.html"
+              class="text-sm text-slate-300 hover:text-white transition-colors"
+              >หน้าแรก</a
+            >
+            <a
+              href="Hardware.html"
+              class="text-sm text-slate-300 hover:text-white transition-colors"
+              >ฮาร์ดแวร์</a
+            >
+            <a
+              href="donate.html"
+              class="px-6 py-2 rounded-full bg-white text-slate-900 text-sm font-bold hover:bg-blue-50 transition-all hover:scale-105"
+            >
+              บริจาคเลย <i class="fas fa-heart text-red-500 ml-1"></i>
+            </a>
+          </div>
+
+          <button
+            onclick="toggleMenu()"
+            class="md:hidden text-white text-xl focus:outline-none"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+        <div
+          id="mobile-menu"
+          class="md:hidden flex flex-col gap-4 mt-4 text-center"
+        >
+          <a
+            href="index.html"
+            class="py-2 text-slate-300 hover:text-white border-b border-white/5"
+            >หน้าแรก</a
+          >
+          <a
+            href="Hardware.html"
+            class="py-2 text-slate-300 hover:text-white border-b border-white/5"
+            >ฮาร์ดแวร์</a
+          >
+          <a
+            href="donate.html"
+            class="py-3 bg-blue-600 rounded-xl text-white font-bold mt-2"
+            >บริจาคเลย</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 pt-16 pb-32 text-center relative z-10">
+      <header class="mb-16 reveal" style="animation-delay: 0.1s">
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold uppercase tracking-widest"
+        >
+          <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+          Vision 2024 Project
+        </div>
+        <h2
+          class="text-5xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tighter leading-tight text-white"
+        >
+          สร้าง <span class="text-gradient">LAB ในฝัน</span><br />เพื่ออนาคต
+        </h2>
+        <p
+          class="text-slate-400 text-base md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
+        >
+          ร่วมเป็นส่วนหนึ่งในการสนับสนุนเทคโนโลยีและอุปกรณ์การเรียนรู้
+          เพื่อให้นักศึกษาได้สัมผัสประสบการณ์ระดับโลก
+        </p>
+      </header>
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 max-w-4xl mx-auto reveal"
+        style="animation-delay: 0.3s"
+      >
+        <div
+          class="glass-card p-8 md:p-10 rounded-[2.5rem] text-left group cursor-pointer"
+          onclick="location.href = 'donate.html'"
+        >
+          <div
+            class="w-14 h-14 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6 text-blue-400 group-hover:scale-110 transition-transform"
+          >
+            <i class="fas fa-wallet text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3 text-white">สนับสนุนเงินทุน</h3>
+          <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+            สมทบทุนเพื่อซื้อซอฟต์แวร์และอุปกรณ์ที่จำเป็นสำหรับการเรียนการสอน
+          </p>
+          <div
+            class="flex items-center text-blue-400 font-bold text-sm group-hover:translate-x-2 transition-transform"
+          >
+            ร่วมบริจาค <i class="fas fa-arrow-right ml-2"></i>
+          </div>
+        </div>
+
+        <div
+          class="glass-card p-8 md:p-10 rounded-[2.5rem] text-left group cursor-pointer"
+          onclick="location.href = 'Hardware.html'"
+        >
+          <div
+            class="w-14 h-14 bg-emerald-500/20 rounded-2xl flex items-center justify-center mb-6 text-emerald-400 group-hover:scale-110 transition-transform"
+          >
+            <i class="fas fa-server text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3 text-white">บริจาคอุปกรณ์</h3>
+          <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+            ส่งต่ออุปกรณ์คอมพิวเตอร์ที่ไม่ได้ใช้ ให้เป็นประโยชน์ต่อการศึกษา
+          </p>
+          <div
+            class="flex items-center text-emerald-400 font-bold text-sm group-hover:translate-x-2 transition-transform"
+          >
+            ดูรายการที่ต้องการ <i class="fas fa-arrow-right ml-2"></i>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      class="py-8 text-center text-slate-500 text-xs reveal"
+      style="animation-delay: 0.5s"
+    >
+      <p>&copy; 2024 Tech Dept. Fund. All rights reserved.</p>
+    </footer>
+
+    <div
+      onclick="checkAdminAccess()"
+      class="fixed bottom-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-slate-800/50 border border-white/10 text-slate-600 cursor-pointer hover:bg-slate-700 hover:text-white transition-all z-50"
+    >
+      <i class="fas fa-shield-alt text-xs"></i>
+    </div>
+
+    <script>
+      function updateClock() {
+        const now = new Date();
+        const options = { day: "numeric", month: "short", year: "numeric" };
+        document.getElementById("realtime-clock").innerText =
+          now.toLocaleDateString("th-TH", options);
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      function toggleMenu() {
+        document.getElementById("mobile-menu").classList.toggle("open");
+      }
+
+      function checkAdminAccess() {
+        const ADMIN_CODE = "9999"; // รหัสผ่านง่ายๆ สำหรับตัวอย่าง
+        const password = prompt("กรุณาใส่รหัสผ่านผู้ดูแลระบบ:");
+        if (password === ADMIN_CODE) window.location.href = "admin.html";
+      }
+    </script>
+  </body>
+</html>

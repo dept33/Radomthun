@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hardware Support - แผนกคอมพิวเตอร์</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;600&display=swap");
+      body {
+        font-family: "Kanit", sans-serif;
+        background: #020617;
+        color: white;
+        overflow-x: hidden;
+      }
+      .glass-panel {
+        background: rgba(30, 41, 59, 0.4);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+      }
+      .tab-card {
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .tab-card.active {
+        border-color: #3b82f6;
+        background: rgba(59, 130, 246, 0.1);
+      }
+      .item-card.selected {
+        border: 2px solid #10b981;
+        background: rgba(16, 185, 129, 0.1);
+      }
+      .input-field {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .input-field:focus {
+        outline: none;
+        border-color: #3b82f6;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fadeIn {
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen p-4 md:p-8 pb-20">
+    <div class="max-w-5xl mx-auto mb-10">
+      <a
+        href="index.html"
+        class="inline-flex items-center text-slate-400 hover:text-white mb-6 transition-colors"
+      >
+        <i class="fas fa-arrow-left mr-2"></i> กลับหน้าหลัก
+      </a>
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-2">
+        Hardware <span class="text-blue-500">Support</span>
+      </h1>
+      <p class="text-slate-400 text-sm md:text-base font-light">
+        สนับสนุนอุปกรณ์เพื่องานการศึกษา
+      </p>
+    </div>
+
+    <div
+      class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12 animate-fadeIn"
+    >
+      <div
+        onclick="switchTab('direct')"
+        id="tabDirect"
+        class="tab-card active glass-panel p-6 rounded-2xl flex items-center gap-6"
+      >
+        <div
+          class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-blue-400"
+        >
+          <i class="fas fa-box-open text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold">บริจาคอุปกรณ์</h3>
+          <p class="text-slate-500 text-xs">ส่งของที่มีอยู่ให้แผนก</p>
+        </div>
+      </div>
+      <div
+        onclick="switchTab('fund')"
+        id="tabFund"
+        class="tab-card glass-panel p-6 rounded-2xl flex items-center gap-6"
+      >
+        <div
+          class="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center text-emerald-400"
+        >
+          <i class="fas fa-hand-holding-heart text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold">ระดมทุนซื้อ</h3>
+          <p class="text-slate-500 text-xs">ช่วยซื้อของใหม่</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="sectionDirect" class="max-w-5xl mx-auto animate-fadeIn">
+      <div class="glass-panel p-6 md:p-10 rounded-[2rem]">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-blue-400 mb-4">
+              <i class="fas fa-info-circle mr-2"></i>ข้อมูลอุปกรณ์
+            </h3>
+            <input
+              type="text"
+              id="deviceName"
+              placeholder="ชื่ออุปกรณ์ (เช่น จอคอม, เมาส์)"
+              class="input-field w-full p-4 rounded-xl text-sm text-white"
+            />
+            <input
+              type="text"
+              id="deviceBrand"
+              placeholder="ยี่ห้อ / รุ่น"
+              class="input-field w-full p-4 rounded-xl text-sm text-white"
+            />
+            <textarea
+              id="deviceSpec"
+              placeholder="รายละเอียดสภาพการใช้งาน"
+              class="input-field w-full p-4 rounded-xl text-sm h-32 text-white"
+            ></textarea>
+          </div>
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-blue-400 mb-4">
+              <i class="fas fa-user mr-2"></i>ข้อมูลผู้บริจาค
+            </h3>
+            <input
+              type="text"
+              id="donorName"
+              placeholder="ชื่อ-นามสกุล"
+              class="input-field w-full p-4 rounded-xl text-sm text-white"
+            />
+            <input
+              type="text"
+              id="donorContact"
+              placeholder="เบอร์โทรศัพท์ติดต่อ"
+              class="input-field w-full p-4 rounded-xl text-sm text-white"
+            />
+            <button
+              onclick="submitDirectSupport()"
+              class="w-full py-4 mt-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-900/20"
+            >
+              ยืนยันการบริจาค
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="sectionFund" class="max-w-5xl mx-auto hidden animate-fadeIn">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+        <div
+          onclick="selectItem(this, 1200, 'RAM DDR4 8GB')"
+          class="item-card glass-panel p-5 rounded-2xl cursor-pointer group relative overflow-hidden"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <i class="fas fa-memory text-2xl text-blue-400"></i
+            ><i
+              class="fas fa-check-circle text-emerald-500 opacity-0 group-[.selected]:opacity-100 transition-opacity"
+            ></i>
+          </div>
+          <h4 class="font-bold text-white">RAM DDR4 8GB</h4>
+          <p class="text-emerald-400 font-bold mt-1">1,200 บาท</p>
+          <input type="checkbox" class="hidden" />
+        </div>
+        <div
+          onclick="selectItem(this, 2500, 'SSD NVMe 500GB')"
+          class="item-card glass-panel p-5 rounded-2xl cursor-pointer group relative overflow-hidden"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <i class="fas fa-hdd text-2xl text-purple-400"></i
+            ><i
+              class="fas fa-check-circle text-emerald-500 opacity-0 group-[.selected]:opacity-100 transition-opacity"
+            ></i>
+          </div>
+          <h4 class="font-bold text-white">SSD NVMe 500GB</h4>
+          <p class="text-emerald-400 font-bold mt-1">2,500 บาท</p>
+          <input type="checkbox" class="hidden" />
+        </div>
+        <div
+          onclick="selectItem(this, 550, 'Gaming Mouse')"
+          class="item-card glass-panel p-5 rounded-2xl cursor-pointer group relative overflow-hidden"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <i class="fas fa-mouse text-2xl text-orange-400"></i
+            ><i
+              class="fas fa-check-circle text-emerald-500 opacity-0 group-[.selected]:opacity-100 transition-opacity"
+            ></i>
+          </div>
+          <h4 class="font-bold text-white">Gaming Mouse</h4>
+          <p class="text-emerald-400 font-bold mt-1">550 บาท</p>
+          <input type="checkbox" class="hidden" />
+        </div>
+      </div>
+      <div
+        class="glass-panel p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6 sticky bottom-4 md:static bg-slate-900/90 backdrop-blur-xl border-t border-white/10"
+      >
+        <div class="text-center md:text-left">
+          <p class="text-[10px] text-slate-500 uppercase tracking-widest">
+            ยอดรวมที่เลือก
+          </p>
+          <h3 class="text-3xl font-black text-white" id="totalDisplay">0.-</h3>
+        </div>
+        <button
+          onclick="showQRCode()"
+          class="w-full md:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-500 rounded-xl font-bold shadow-lg transition-all"
+        >
+          ไปที่หน้าชำระเงิน
+        </button>
+      </div>
+    </div>
+
+    <script>
+      let totalAmount = 0;
+      let systemData = JSON.parse(localStorage.getItem("tech_donate_data")) || {
+        bank: {
+          name: "ธนาคารกรุงไทย",
+          num: "658-264-540-3",
+          acc: "นายเอกราช และ นายอุเทน",
+        },
+        logs: [],
+        hardwareLogs: [],
+      };
+
+      function switchTab(tab) {
+        document
+          .getElementById("tabDirect")
+          .classList.toggle("active", tab === "direct");
+        document
+          .getElementById("tabFund")
+          .classList.toggle("active", tab === "fund");
+        document
+          .getElementById("sectionDirect")
+          .classList.toggle("hidden", tab === "fund");
+        document
+          .getElementById("sectionFund")
+          .classList.toggle("hidden", tab === "direct");
+      }
+
+      function selectItem(el, price) {
+        const cb = el.querySelector("input");
+        cb.checked = !cb.checked;
+        el.classList.toggle("selected", cb.checked);
+        totalAmount += cb.checked ? price : -price;
+        document.getElementById("totalDisplay").innerText =
+          totalAmount.toLocaleString() + ".-";
+      }
+
+      function submitDirectSupport() {
+        const device = document.getElementById("deviceName").value;
+        const brand = document.getElementById("deviceBrand").value;
+        const spec = document.getElementById("deviceSpec").value;
+        const donor = document.getElementById("donorName").value;
+        const contact = document.getElementById("donorContact").value;
+
+        if (!device || !donor) {
+          return Swal.fire({
+            icon: "warning",
+            title: "ข้อมูลไม่ครบ",
+            text: "กรุณากรอกชื่ออุปกรณ์และชื่อผู้บริจาค",
+            background: "#020617",
+            color: "#fff",
+          });
+        }
+
+        const newOrder = {
+          id: Date.now(),
+          device,
+          brand,
+          spec,
+          donor,
+          contact,
+          date: new Date().toLocaleString("th-TH"),
+        };
+
+        systemData.hardwareLogs = systemData.hardwareLogs || [];
+        systemData.hardwareLogs.unshift(newOrder);
+        localStorage.setItem("tech_donate_data", JSON.stringify(systemData));
+
+        Swal.fire({
+          icon: "success",
+          title: "สำเร็จ!",
+          text: "ขอบคุณสำหรับการสนับสนุน จะมีเจ้าหน้าที่ติดต่อกลับครับ",
+          background: "#020617",
+          color: "#fff",
+        }).then(() => (window.location.href = "index.html"));
+      }
+
+      function showQRCode() {
+        if (totalAmount <= 0)
+          return Swal.fire({
+            icon: "info",
+            title: "กรุณาเลือกรายการ",
+            background: "#020617",
+            color: "#fff",
+          });
+        window.location.href = `donate.html?amount=${totalAmount}`;
+      }
+    </script>
+  </body>
+</html>
